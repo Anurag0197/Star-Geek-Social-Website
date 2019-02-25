@@ -5,36 +5,41 @@
     <meta charset="utf-8">
     <title>Star Geek</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'simplesocial/css/master.css'%}">
-    <script  type="text/javascript" src="{% static 'simplesocial/js/master.js'%}"></script>
-
-  </head>
+    </head>
 
   <body>
-    <nav class="nabvar mynav" id = "navbar">
-      <div class="container">
-        <a class="navbar-brand mynav" href="{% url 'home' %}">Star Geek</a>
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+     <a class="navbar-brand mynav" href="{% url 'home' %}">Star Geek</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+    {% if user.is_authenticated %}
+      <li><a href="{% url 'posts:create' %}">Posts</a></li>
+      <li><a href="{% url 'groups:all' %}">Groups</a></li>
+      <li><a href="{% url 'groups:create' %}">CreateGroup</a></li>
+      <li><a href="{% url 'accounts:logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    {% else %}
+      <li><a href="{% url 'groups:all' %}">Groups</a></li>
+      <li><a href="{% url 'accounts:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <li><a href="{% url 'accounts:signup' %}"><span class="glyphicon glyphicon-user"></span> SignUp</a></li>
+    {% endif %}
 
-        <ul class="nav navbar-nav navbar-right">
-          {% if user.is_authenticated %}
-            <li><a href="{% url 'posts:create' %}">Posts</a></li>
-            <li><a href="{% url 'groups:all' %}">Groups</a></li>
-            <li><a href="{% url 'groups:create' %}">CreateGroup</a></li>
-            <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-          {% else %}
-            <li><a href="{% url 'groups:all' %}">Groups</a></li>
-            <li><a href="{% url 'accounts:login' %}">Login</a></li>
-            <li><a href="{% url 'accounts:signup' %}">SignUp</a></li>
-          {% endif %}
-
-        </ul>
-
-      </div>
-    </nav>
+</ul>
+    </div>
+  </div>
+</nav>
 
     <div class="container mycontentent">
 
